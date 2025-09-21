@@ -10259,3 +10259,10 @@ sidebar css
   }
 }
 
+.badge { border-radius: 50px; } /* tu mismo look pill */
+
+.badge-warning { background: rgba(251, 167, 7, .16); color: #c3ab47; }
+.badge-info    { background: rgba(0, 143, 251, .16); color: #0d6efd; }
+.badge-primary { background: rgba(13, 110, 253, .16); color: #0d6efd; }
+.badge-success { background: rgba(9, 173, 149, .16); color: #09AD95; }
+.badge-danger  { background: rgba(249, 103, 104, .16); color: #F96768; }

@@ -1,62 +1,40 @@
-// src/app/pages/home/home.ts
+// src/app/pages/home/sections/proveedores/proveedores.ts
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
-import { AdminStore } from '../../stores/admin.store';
-import { Cliennts } from './sections/cliennts/cliennts';
-import { UsersService, UserRow } from '../../services/users.service';
-import { Proveedores } from './sections/proveedores/proveedores';
-import { DashboardStore } from '../../stores/dashboard.store';
-import { Dashboard } from './sections/dashboard/dashboard';
-import { Sidebar } from './sidebar/sidebar';
-
-// tipado del menú que usa el store
-type Option =
-  | 'dashboard'
-  | 'clientes'
-  | 'prestadores'
-  | 'solicitudes'
-  | 'finanzas'
-  | 'notificaciones'
-  | 'ajustes';
+import { AdminStore } from '../../../../stores/admin.store';
+import { UsersService, UserRow } from '../../../../services/users.service';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-proveedores',
   standalone: true,
-  imports: [
-    Sidebar,
-    CommonModule,
-    Dashboard,
-    Cliennts,
-    Proveedores],
-  templateUrl: './home.html',
-  styleUrls: ['./home.scss'],
+  imports: [CommonModule],
+  templateUrl: './proveedores.html',
+  styleUrl: './proveedores.scss'
 })
-export class Home {
-  constructor() {
-    // this.store.setOption('dashboard')
-  }
-
-  // == estado centralizado ==
+export class Proveedores {
+  // Store (estado compartido)
   store = inject(AdminStore);
-
-  // servicios
+  // Servicio para actualizar estado del prestador
   private usersSvc = inject(UsersService);
 
-// src/app/pages/home/home.ts
-ngOnInit() {
-  this.store.forceDashboard();  // siempre abre en dashboard
-  // si quieres mantener la búsqueda: this.store.forceDashboard(true)
-}
-
-
-
-  // navegación desde el menú
-  setOption(opt: Option) {
-    this.store.setOption(opt);
+  ngOnInit() {
+    // Deja marcada la opción y carga si no hay datos
+    this.store.setOption('dashboard');
+    if (this.store.providers().length === 0) {
+      this.store.loadProviders();
+    }
   }
 
-  // acción de aprobación/denegación de prestador
+  // Paginación
+  goToPage(p: number) {
+    this.store.goToPage(p);
+  }
+
+  // trackBy estable
+  trackById = this.store.trackById.bind(this.store);
+
+  // Aprobación / denegación con confirmación
   async confirmProviderDecision(p: UserRow) {
     const result = await Swal.fire({
       title: 'Revisión de prestador',
@@ -82,9 +60,9 @@ ngOnInit() {
     try {
       await this.usersSvc.updateUserStatus(p.id, approve);
 
-      // refresco local del array en el store
+      // Refresca en memoria la lista del store
       const updated = this.store.providers().map(u =>
-        u.id === p.id ? { ...u, status: (approve ? 'active' : 'inactive') as any } : u
+        u.id === p.id ? { ...u, status: (approve ? 'active' : 'inactive') as 'active' | 'inactive' } : u
       );
       this.store.providers.set(updated);
 

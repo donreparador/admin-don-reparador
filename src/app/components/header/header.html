@@ -277,17 +277,37 @@
                       <div class="header-nav-right">
                           <div class="header-account">
                               <div class="dropdown">
-                                  <div data-bs-toggle="dropdown" aria-expanded="false">
-                                      <img src="https://e7.pngegg.com/pngimages/636/819/png-clipart-computer-icons-privacy-policy-admin-icon-copyright-rim.png" alt="">
+                                <div data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
+                                    <img src="https://e7.pngegg.com/pngimages/636/819/png-clipart-computer-icons-privacy-policy-admin-icon-copyright-rim.png" alt="Admin" width="32" height="32">
                                   </div>
                                   <ul class="dropdown-menu dropdown-menu-end">
-                                      <li><a class="dropdown-item" href="dashboard.html"><i class="far fa-gauge-high"></i> Dashboard</a></li>
-                                      <li><a class="dropdown-item" href="profile.html"><i class="far fa-user"></i> Clientes</a></li>
-                                      <li><a class="dropdown-item" href="profile-booking.html"><i class="far fa-shopping-bag"></i> Proveedores</a></li>
-                                      <li><a class="dropdown-item" href="profile-booking-history.html"><i class="far fa-clipboard-list"></i> Solicitudes de servicio</a></li>
-                                      <li><a class="dropdown-item" href="profile-setting.html"><i class="far fa-cog"></i> Ajustes</a></li>
-                                      <li><a class="dropdown-item" href="#"><i class="far fa-sign-out"></i> Salir</a></li>
+                                    <!-- Notificaciones -->
+                                    <li>
+                                      <a class="dropdown-item" style="cursor:pointer;" 
+                                      (click)="setOption('notificaciones')"
+                                      
+                                      >
+                                        <i class="far fa-bell"></i> Notificaciones
+                                      </a>
+                                    </li>
+                                  
+                                    <!-- Ajustes -->
+                                    <li>
+                                      <a class="dropdown-item" style="cursor:pointer;" (click)="setOption('ajustes')">
+                                        <i class="far fa-cog"></i> Ajustes
+                                      </a>
+                                    </li>
+                                  
+                                    <li><hr class="dropdown-divider"></li>
+                                  
+                                    <!-- Salir -->
+                                    <li>
+                                      <a class="dropdown-item" style="cursor:pointer;" (click)="logout()">
+                                        <i class="far fa-sign-out"></i> Salir
+                                      </a>
+                                    </li>
                                   </ul>
+                                  
                               </div>
                           </div>
                       </div>

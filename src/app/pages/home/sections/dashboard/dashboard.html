@@ -1,0 +1,92 @@
+<div class="row">
+    <!-- Tarjeta 1: Solicitudes pendientes -->
+    <div class="col-md-6 col-lg-4">
+      <div class="dashboard-widget dashboard-widget-color-1">
+        <div class="dashboard-widget-info">
+          <h1>{{ resumen.pendientes }}</h1>
+          <span>Solicitudes pendientes</span>
+        </div>
+        <div class="dashboard-widget-icon">
+          <i class="fal fa-hourglass-half"></i>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Tarjeta 2: Solicitudes asignadas -->
+    <div class="col-md-6 col-lg-4">
+      <div class="dashboard-widget dashboard-widget-color-2">
+        <div class="dashboard-widget-info">
+          <h1>{{ resumen.asignadas }}</h1>
+          <span>Solicitudes asignadas</span>
+        </div>
+        <div class="dashboard-widget-icon">
+          <i class="fal fa-user-check"></i>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Tarjeta 3: Recargas IZIPAY aprobadas -->
+    <div class="col-md-6 col-lg-4">
+      <div class="dashboard-widget dashboard-widget-color-3">
+        <div class="dashboard-widget-info">
+          <h1>$ {{ resumen.recargas | number }}</h1>
+          <span>Recargas aprobadas (30 días)</span>
+        </div>
+        <div class="dashboard-widget-icon">
+          <i class="fal fa-wallet"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <!-- Gráfico apilado (ApexCharts) -->
+    <div class="col-lg-8">
+      <div class="user-profile-card">
+        <h4 class="user-profile-card-title">Solicitudes por estado</h4>
+        <app-dashboard-chart></app-dashboard-chart>
+      </div>
+    </div>
+  
+    <!-- Notificaciones (dinámicas desde el store) -->
+    <div class="col-lg-4">
+      <app-dashboard-notifications></app-dashboard-notifications>
+      
+    </div>
+  
+    <!-- Tabla de solicitudes -->
+    <div class="col-lg-12">
+      <div class="user-profile-card profile-booking">
+        <h4 class="user-profile-card-title">Solicitudes de servicio</h4>
+        <div class="table-responsive">
+          <table class="table text-nowrap">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Cliente</th>
+                <th>Servicio/Categoría</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of solicitudes">
+                <td>{{ s.id }}.</td>
+                <td><b>{{ s.cliente }}</b></td>
+                <td>{{ s.servicio }}</td>
+                <td>{{ s.fecha }}</td>
+                <td><span class="badge" [ngClass]="s.badge">{{ s.estado }}</span></td>
+                <td>
+                  <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm">
+                    <i class="far fa-eye"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

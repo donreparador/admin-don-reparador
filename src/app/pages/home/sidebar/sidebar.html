@@ -1,0 +1,103 @@
+<div class="user-profile-sidebar">
+    <div class="sidebar-header">
+      <i class="far fa-user-shield fa-2x"></i>
+      <div class="mt-2">
+        <h6>Administrador</h6>
+        <small class="text-muted">Acceso completo</small>
+      </div>
+    </div>
+    
+      <ul class="user-profile-sidebar-list">
+        <!-- Dashboard -->
+        <li>
+          <a style="cursor: pointer;"  
+          [class.active]="store.option()==='dashboard'"
+          
+          
+          (click)="setOption('dashboard')">
+            <i class="far fa-gauge-high"></i> Dashboard
+          </a>
+        </li>
+      
+        <!-- Clientes -->
+        <li>
+          <a style="cursor: pointer;"  [class.active]="store.option()==='clientes'"
+          (click)="setOption('clientes')">
+            <i class="far fa-user"></i> Clientes
+          </a>
+        </li>
+      
+        <!-- Prestadores -->
+        <li>
+          <a style="cursor: pointer;" (click)="setOption('prestadores')"
+          [class.active]="store.option()==='prestadores'"
+          >
+            <i class="far fa-users-cog"></i> Prestadores
+          </a>
+        </li>
+      
+        <!-- Solicitudes -->
+        <li (click)="setOption('solicitudes')">
+          <a style="cursor: pointer;" 
+          [class.active]="store.option()==='solicitudes'"
+          >
+            <i class="far fa-clipboard-list"></i> Solicitudes de servicio
+          </a>
+        </li>
+        <!-- Finanzas -->
+        <li>
+          <a style="cursor: pointer;" (click)="setOption('finanzas')">
+            <i class="far fa-wallet"></i> Finanzas
+          </a>
+        </li>
+      
+        <!-- Notificaciones -->
+        <li>
+          <a style="cursor: pointer;" (click)="setOption('notificaciones')">
+            <i class="far fa-bell"></i> Notificaciones
+          </a>
+        </li>
+      
+        <!-- Ajustes desplegable -->
+        <li class="profile-menu">
+          <a href="#profile-menu"
+             data-bs-toggle="collapse"
+             aria-expanded="false"
+             aria-controls="profile-menu">
+            <i class="far fa-gear"></i> Ajustes 
+            <i class="far fa-angle-down profile-menu-angle"></i>
+          </a>
+          <div class="collapse" id="profile-menu">
+            <ul class="profile-menu-list">
+              <li>
+                <a style="cursor: pointer;" (click)="store.setAjustesTab('categorias')"
+                   [class.active]="store.option()==='ajustes' && store.ajustesTab()==='categorias'">
+                  <i class="far fa-tags"></i> Categorías
+                </a>
+              </li>
+              <li>
+                <a style="cursor: pointer;" (click)="store.setAjustesTab('cupones')"
+                   [class.active]="store.option()==='ajustes' && store.ajustesTab()==='cupones'">
+                  <i class="far fa-ticket"></i> Cupones/Promos
+                </a>
+              </li>
+              <li>
+                <a style="cursor: pointer;" (click)="store.setAjustesTab('auditoria')"
+                   [class.active]="store.option()==='ajustes' && store.ajustesTab()==='auditoria'">
+                  <i class="far fa-search"></i> Auditoría
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        
+        
+        <!-- Logout -->
+        <li>
+          <a >
+            <i class="far fa-sign-out"></i> Salir
+          </a>
+        </li>
+      </ul>
+      
+  </div>

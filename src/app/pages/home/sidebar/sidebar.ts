@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminStore } from '../../stores/admin.store';
+import { AdminStore } from '../../../stores/admin.store';
 
 type Option =
   | 'dashboard'
@@ -10,23 +10,19 @@ type Option =
   | 'finanzas'
   | 'notificaciones'
   | 'ajustes';
+
 @Component({
-  selector: 'app-header',
+  selector: 'app-sidebar',
+  
   standalone: true,
   imports: [CommonModule],
-  providers: [AdminStore],
-  templateUrl: './header.html',
-  styleUrl: './header.scss'
+  templateUrl: './sidebar.html',
+  styleUrls: ['./sidebar.scss']
 })
-export class Header {
+export class Sidebar {
   store = inject(AdminStore);
 
-
-  logout() {
-    // Implementar lógica de cierre de sesión
-    alert('Cerrar sesión');
-  }
-
+  // navegación desde el menú
   setOption(opt: Option) {
     this.store.setOption(opt);
   }

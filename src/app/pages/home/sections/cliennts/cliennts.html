@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="mb-0">Clientes</h5>
+  
+    <!-- Opción A: con ref local (más simple y sin cast) -->
+    <input #q class="form-control" style="max-width:240px"
+           placeholder="Buscar..."
+           (input)="onSearch(q.value)" />
+    <!-- Opción B (alternativa): (input)="onSearch($any($event.target).value)" -->
+  </div>
+  
+  <div class="table-responsive">
+    <table class="table text-nowrap">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ojo: trackBy usa ; (punto y coma), no coma -->
+        <tr *ngFor="let u of store.clients(); trackBy: trackById">
+          <td>{{ u.name  || '—' }}</td>
+          <td>{{ u.email || '—' }}</td>
+          <td>{{ u.phone || '—' }}</td>
+          <td><span [class]="statusBadgeClass(u)">{{ u.status ?? '—' }}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <nav class="mt-3">
+    <ul class="pagination pagination-sm mb-0">
+      <li class="page-item" [class.disabled]="store.page()===1">
+        <a class="page-link" (click)="goToPage(store.page()-1)">«</a>
+      </li>
+      <li class="page-item disabled">
+        <span class="page-link">{{ store.page() }} / {{ store.totalPages() }}</span>
+      </li>
+      <li class="page-item" [class.disabled]="store.page()===store.totalPages()">
+        <a class="page-link" (click)="goToPage(store.page()+1)">»</a>
+      </li>
+    </ul>
+  </nav>
+  
