@@ -1,0 +1,93 @@
+<!-- src/app/pages/home/sections/categories/categories.html -->
+<!-- <form (submit)="$event.preventDefault(); add()">
+    <div class="row g-3 align-items-end">
+      <div class="col-md-4">
+        <label class="form-label">Nombre</label>
+        <input class="form-control"
+               [value]="name()"
+               (input)="name.set($any($event.target).value)"
+               placeholder="Ej. Refrigeración"
+               required>
+      </div>
+  
+      <div class="col-md-2">
+        <label class="form-label">Orden</label>
+        <input type="number" class="form-control"
+               [value]="order()"
+               (input)="order.set(+($any($event.target).value || 0))">
+      </div>
+  
+      <div class="col-md-4">
+        <label class="form-label">Icono / Imagen</label>
+        <input type="file" class="form-control" (change)="onFile($event)" accept="image/*">
+      </div>
+  
+      <div class="col-md-2">
+        <div class="form-check mt-2">
+          <input id="active" type="checkbox" class="form-check-input"
+                 [checked]="active()" (change)="active.set($any($event.target).checked)">
+          <label for="active" class="form-check-label">Activo</label>
+        </div>
+      </div>
+  
+      <div class="col-md-2">
+        <button class="btn btn-primary w-100" [disabled]="loading()">Agregar</button>
+      </div>
+    </div>
+  </form> -->
+  
+
+  <div class="mb-3 d-flex justify-content-end">
+    <button class="btn btn-primary" style="background-color: #3e6298; border-color: #3e6298;" (click)="openCreateDialog()">
+      <i class="far fa-plus me-1"></i> Nueva categoría
+    </button>
+  </div>
+  <div class="table-responsive">
+    <table class="table text-nowrap align-middle">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Icono</th>
+          <th>Nombre</th>
+          <th>Orden</th>
+          <th>Estado</th>
+          <th style="width:150px">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of list(); let i = index; trackBy: trackById">
+          <td>{{ i + 1 }}</td>
+          <td>
+            <img *ngIf="imgUrl(c)" [src]="imgUrl(c)" alt="icono" style="height:28px;width:auto">
+            <span *ngIf="!imgUrl(c)" class="text-muted">—</span>
+          </td>
+          <td>
+            <input class="form-control form-control-sm"
+                   [value]="c.name"
+                   (change)="quickEdit(c, $any($event.target).value, c.order ?? 0)">
+          </td>
+          <td style="max-width:80px">
+            <input type="number" class="form-control form-control-sm"
+                   [value]="c.order ?? 0"
+                   (change)="quickEdit(c, c.name, +($any($event.target).value || 0))">
+          </td>
+          <td>
+            <span class="badge" [ngClass]="c.active ? 'bg-success' : 'bg-secondary'">
+              {{ c.active ? 'Activo' : 'Inactivo' }}
+            </span>
+          </td>
+          <td class="d-flex gap-2">
+            <button class="btn btn-outline-info btn-sm"
+                    (click)="toggleActive(c)"
+                    [title]="c.active ? 'Desactivar' : 'Activar'">
+              <i class="far" [ngClass]="c.active ? 'fa-toggle-on' : 'fa-toggle-off'"></i>
+            </button>
+            <button class="btn btn-outline-danger btn-sm" (click)="remove(c)" title="Eliminar">
+              <i class="far fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -6,7 +6,7 @@ const LS_KEY = 'adminStore_v1';
 // Opciones válidas (para sanear lo que venga del localStorage)
 const ALLOWED_OPTIONS = [
   'dashboard', 'clientes', 'prestadores', 'solicitudes',
-  'finanzas', 'notificaciones', 'ajustes'
+  'finanzas', 'notificaciones', 'ajustes', 'categorias', 'settings'
 ] as const;
 
 export type OptionMain =
@@ -16,7 +16,9 @@ export type OptionMain =
   | 'solicitudes'
   | 'finanzas'
   | 'notificaciones'
-  | 'ajustes';
+  | 'ajustes'
+  | 'categorias'
+  | 'settings';
 
 export type AjustesTab = 'categorias' | 'cupones' | 'auditoria';
 

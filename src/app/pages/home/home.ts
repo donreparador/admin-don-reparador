@@ -9,6 +9,8 @@ import { Proveedores } from './sections/proveedores/proveedores';
 import { DashboardStore } from '../../stores/dashboard.store';
 import { Dashboard } from './sections/dashboard/dashboard';
 import { Sidebar } from './sidebar/sidebar';
+import { CategoriesComponent } from './sections/categories/categories';
+import { SettingsComponent } from './sections/settings/settings';
 
 // tipado del menú que usa el store
 type Option =
@@ -18,7 +20,9 @@ type Option =
   | 'solicitudes'
   | 'finanzas'
   | 'notificaciones'
-  | 'ajustes';
+  | 'ajustes'
+  | 'categorias'
+  | 'settings';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +32,8 @@ type Option =
     CommonModule,
     Dashboard,
     Cliennts,
+    CategoriesComponent,
+    SettingsComponent,
     Proveedores],
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],

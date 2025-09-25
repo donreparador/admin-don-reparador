@@ -1,0 +1,61 @@
+<div class="row">
+  <!-- Columna izquierda: ajustes -->
+  <div class="col-lg-7">
+    <div class="user-profile-card profile-booking">
+      <h4 class="user-profile-card-title">Ajustes App Móvil</h4>
+
+      <ng-container *ngIf="cfg() as c">
+        <div class="list-group mb-3">
+          <div *ngFor="let k of flags" class="list-group-item d-flex justify-content-between align-items-center">
+            <label class="form-check-label text-capitalize">{{ k }}</label>
+            <div class="form-check form-switch m-0">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [checked]="isOn(c, k)"
+                (change)="toggle(k)" />
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <button class="btn btn-outline-secondary w-100" (click)="editAdvanced()">
+            Configuración avanzada
+          </button>
+        </div>
+
+        <div class="text-muted small">
+          <p>Versión mínima: <b>{{ c.appMinVersion || '—' }}</b></p>
+          <p>Rollout: <b>{{ c.rolloutPercent ?? 100 }}%</b></p>
+          <p>Mantenimiento: <b>{{ c.maintenance ? 'Sí' : 'No' }}</b></p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Columna derecha: preview -->
+  <div class="col-lg-5">
+    <div class="user-profile-card profile-booking">
+      <h4 class="user-profile-card-title">Preview App</h4>
+
+      <div class="input-group mb-2">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="previewUrl"
+          placeholder="URL de la app"
+        />
+        <button class="btn btn-outline-primary" (click)="reloadPreview()">Actualizar</button>
+      </div>
+
+      <div class="preview-container border rounded" style="height: 80vh; overflow: hidden;">
+        <iframe
+          [src]="sanitizedUrl"
+          width="100%"
+          height="100%"
+          style="border:0"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</div>

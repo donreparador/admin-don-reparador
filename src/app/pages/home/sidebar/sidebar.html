@@ -70,9 +70,15 @@
           <div class="collapse" id="profile-menu">
             <ul class="profile-menu-list">
               <li>
-                <a style="cursor: pointer;" (click)="store.setAjustesTab('categorias')"
-                   [class.active]="store.option()==='ajustes' && store.ajustesTab()==='categorias'">
+                <a style="cursor: pointer;" (click)="setOption('categorias')"
+                   [class.active]="store.option()==='categorias'">
                   <i class="far fa-tags"></i> Categorías
+                </a>
+              </li>
+              <li>
+                <a style="cursor: pointer;" (click)="setOption('settings')"
+                   [class.active]="store.option()==='settings'">
+                  <i class="far fa-mobile"></i> Ajustes app móvil
                 </a>
               </li>
               <li>

@@ -9,7 +9,9 @@ type Option =
   | 'solicitudes'
   | 'finanzas'
   | 'notificaciones'
-  | 'ajustes';
+  | 'ajustes'
+  | 'categorias'
+  | 'settings';
 
 @Component({
   selector: 'app-sidebar',
