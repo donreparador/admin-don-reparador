@@ -10,3 +10,33 @@
 .btn-new:hover {
   background-color: #1c4f9b;
 }
+
+.sub {
+  background-color: #3e6298;
+}
+/* Chip de subcategoría existente */
+.bg-sub {
+    background-color: #343a40 !important; /* o tu color */
+    color: #fff !important;
+  }
+  .badge-chip {
+    padding: .35rem .6rem;
+    font-weight: 500;
+  }
+  
+  /* Chip “añadir” (estilo tag) */
+  .add-chip {
+    background-color: var(--bs-primary) !important;
+    color: #fff !important;
+    border: 0;
+    cursor: pointer;
+  }
+  .add-chip:hover {
+    filter: brightness(0.92);
+  }
+  
+  /* por si tu build no trae btn-close-white */
+  .btn-close-white {
+    filter: invert(1);
+  }
+  

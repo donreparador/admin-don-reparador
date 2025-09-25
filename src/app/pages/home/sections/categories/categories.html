@@ -1,47 +1,12 @@
 <!-- src/app/pages/home/sections/categories/categories.html -->
-<!-- <form (submit)="$event.preventDefault(); add()">
-    <div class="row g-3 align-items-end">
-      <div class="col-md-4">
-        <label class="form-label">Nombre</label>
-        <input class="form-control"
-               [value]="name()"
-               (input)="name.set($any($event.target).value)"
-               placeholder="Ej. Refrigeración"
-               required>
-      </div>
-  
-      <div class="col-md-2">
-        <label class="form-label">Orden</label>
-        <input type="number" class="form-control"
-               [value]="order()"
-               (input)="order.set(+($any($event.target).value || 0))">
-      </div>
-  
-      <div class="col-md-4">
-        <label class="form-label">Icono / Imagen</label>
-        <input type="file" class="form-control" (change)="onFile($event)" accept="image/*">
-      </div>
-  
-      <div class="col-md-2">
-        <div class="form-check mt-2">
-          <input id="active" type="checkbox" class="form-check-input"
-                 [checked]="active()" (change)="active.set($any($event.target).checked)">
-          <label for="active" class="form-check-label">Activo</label>
-        </div>
-      </div>
-  
-      <div class="col-md-2">
-        <button class="btn btn-primary w-100" [disabled]="loading()">Agregar</button>
-      </div>
-    </div>
-  </form> -->
-  
 
-  <div class="mb-3 d-flex justify-content-end">
-    <button class="btn btn-primary" style="background-color: #3e6298; border-color: #3e6298;" (click)="openCreateDialog()">
+<div class="mb-3 d-flex justify-content-end">
+    <button class="btn btn-primary" style="background-color:#3e6298;border-color:#3e6298"
+            (click)="openCreateDialog()">
       <i class="far fa-plus me-1"></i> Nueva categoría
     </button>
   </div>
+  
   <div class="table-responsive">
     <table class="table text-nowrap align-middle">
       <thead>
@@ -51,6 +16,8 @@
           <th>Nombre</th>
           <th>Orden</th>
           <th>Estado</th>
+          <!-- NUEVA COLUMNA -->
+          <th>Sub-categorías</th>
           <th style="width:150px">Acciones</th>
         </tr>
       </thead>
@@ -76,12 +43,63 @@
               {{ c.active ? 'Activo' : 'Inactivo' }}
             </span>
           </td>
+  
+          <!-- NUEVA COLUMNA -->
+          <td>
+            <ng-container *ngIf="c.subs?.length; else noSubs">
+              <div class="d-flex flex-column gap-1">
+                <!-- chips existentes -->
+                <span *ngFor="let sc of c.subs; let i = index"
+                      style="background-color:#cdf8d6;
+                      border-color:#3e9860;
+                      color: #031531;"
+                      class="badge rounded-pill bg-sub  align-items-center justify-content-between">
+                  {{ sc.name }}
+                  <button type="button"
+                          class="btn-close btn-close-dark ms-2"
+                          title="Eliminar subcategoría"
+                          style="font-size:.6rem;
+                          color: #031531 !important;
+                          cursor: pointer;
+                          "
+                          (click)="removeSub(c, i, sc)">
+                  </button>
+                </span>
+          
+                <!-- chip ADD -->
+                <button type="button"
+                        style="background-color:#3e6298;border-color:#3e6298"
+                        class="badge rounded-pill  "
+                        (click)="openSubs(c); $event.stopPropagation()">
+                  <i class="far fa-plus me-1"></i> Añadir sub-categoría
+                </button>
+              </div>
+            </ng-container>
+          
+            <!-- si no hay subs, solo se muestra el chip ADD -->
+            <ng-template #noSubs>
+              <button type="button"
+              style="background-color:#3e6298;border-color:#3e6298"
+                      class="badge rounded-pill  add-chip d-inline-flex align-items-center"
+                      (click)="openSubs(c); $event.stopPropagation()">
+                <i class="far fa-plus me-1"></i> Añadir sub-categoría
+              </button>
+            </ng-template>
+          </td>
+          
           <td class="d-flex gap-2">
-            <button class="btn btn-outline-info btn-sm"
+            <button class="btn btn-outline-info btn-sm" 
                     (click)="toggleActive(c)"
                     [title]="c.active ? 'Desactivar' : 'Activar'">
               <i class="far" [ngClass]="c.active ? 'fa-toggle-on' : 'fa-toggle-off'"></i>
             </button>
+  
+            <!-- <button type="button"
+                    class="btn btn-outline-primary btn-sm me-2"
+                    (click)="openSubs(c); $event.stopPropagation()">
+              Subcats
+            </button> -->
+  
             <button class="btn btn-outline-danger btn-sm" (click)="remove(c)" title="Eliminar">
               <i class="far fa-trash"></i>
             </button>
@@ -90,4 +108,5 @@
       </tbody>
     </table>
   </div>
+  
   
