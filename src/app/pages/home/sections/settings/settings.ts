@@ -14,7 +14,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   templateUrl: './settings.html',
 })
 export class SettingsComponent implements OnDestroy, OnInit {
-  previewUrl = 'http://localhost:4200';
+  previewUrl = 'https://app.donreparador.com/';
   sanitizedUrl: SafeResourceUrl;
 
   devices = [
